@@ -3,7 +3,7 @@ import 'package:castel_pos/widgets/order_list/order_details/order_summary_detail
 import 'package:castel_pos/widgets/order_list/order_list_header_label.dart';
 import 'package:castel_pos/widgets/order_list/order_list_items.dart';
 import 'package:castel_pos/widgets/order_list/order_list_title.dart';
-import 'package:castel_pos/widgets/order_options/save_order_button.dart';
+import 'package:castel_pos/widgets/order_options/save_orders_button.dart';
 import 'package:flutter/material.dart';
 
 class OrderList extends StatefulWidget {

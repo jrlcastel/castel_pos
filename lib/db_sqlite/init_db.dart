@@ -107,6 +107,17 @@ class MenuOrderingDatabase {
     return await _db.query(tableName);
   }
 
+  Future removeFromSummaryTable (String id) async {
+    Database _db = await instance.database;
+    return await _db.rawQuery("DELETE FROM \"order_summary\" WHERE \"order_summary_id\"=\"$id\"");
+  }
+
+  Future getOrderDetails (String tableName, String summaryID) async {
+    print("DEBUG: Database - Fetching $tableName data... ");
+    Database _db = await instance.database;
+    return await _db.rawQuery("SELECT * FROM \"$tableName\" WHERE \"summary_id\"=\"$summaryID\"");
+  }
+
 
   void printTable(String tableName) async {
     Database _db = await instance.database;

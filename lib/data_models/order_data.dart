@@ -18,12 +18,15 @@ class OrderDataSummary {
     };
   }
 
+  OrderDataSummary({@required this.orderSummaryID, @required this.dateTime, @required this.subTotal, @required this.discount, @required this.total, });
+
 }
 
 
 class OrderDataDetail {
 
   String itemName;
+  int summaryID;
   int quantity;
   double calculatedPrice;
   
@@ -34,6 +37,8 @@ class OrderDataDetail {
       'calculated_price' : calculatedPrice,
     };
   }
+
+  OrderDataDetail({@required this.itemName, @required this.summaryID, @required this.quantity, @required this.calculatedPrice});
 
 
 }
