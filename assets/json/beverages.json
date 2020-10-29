@@ -1,0 +1,97 @@
+[
+	{
+	"item_name" : "Black Tea",
+	"category" : "beverage",
+	"price" : "50"
+	},
+	{
+	"item_name" : "Bottled Water 300 ml",
+	"category" : "beverage",
+	"price" : "20"
+	},
+	{
+	"item_name" : "Bottled Water 500 ml",
+	"category" : "beverage",
+	"price" : "30"
+	},
+	{
+	"item_name" : "Coffee",
+	"category" : "beverage",
+	"price" : "50"
+	},
+	{
+	"item_name" : "Coffee Float",
+	"category" : "beverage",
+	"price" : "60"
+	},
+	{
+	"item_name" : "Coke",
+	"category" : "beverage",
+	"price" : "35"
+	},
+	{
+	"item_name" : "Coke Float",
+	"category" : "beverage",
+	"price" : "60"
+	},
+	{
+	"item_name" : "Coke Zero",
+	"category" : "beverage",
+	"price" : "35"
+	},
+	{
+	"item_name" : "Coke Float",
+	"category" : "beverage",
+	"price" : "60"
+	},
+	{
+	"item_name" : "Green Tea",
+	"category" : "beverage",
+	"price" : "50"
+	},
+	{
+	"item_name" : "Hot Chocolate",
+	"category" : "beverage",
+	"price" : "50"
+	},
+	{
+	"item_name" : "Iced Tea",
+	"category" : "beverage",
+	"price" : "35"
+	},
+	{
+	"item_name" : "Milk Tea",
+	"category" : "beverage",
+	"price" : "150"
+	},
+	{
+	"item_name" : "Iced Tea",
+	"category" : "beverage",
+	"price" : "35"
+	},
+	{
+	"item_name" : "mocha",
+	"category" : "beverage",
+	"price" : "75"
+	},
+	{
+	"item_name" : "orange juice",
+	"category" : "beverage",
+	"price" : "45"
+	},
+	{
+	"item_name" : "pinapple juice",
+	"category" : "beverage",
+	"price" : "45"
+	},
+	{
+	"item_name" : "Royal",
+	"category" : "beverage",
+	"price" : "35"
+	},
+	{
+	"item_name" : "Sprite",
+	"category" : "beverage",
+	"price" : "35"
+	}
+]

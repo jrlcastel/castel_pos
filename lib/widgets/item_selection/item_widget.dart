@@ -1,5 +1,9 @@
+import 'package:castel_pos/data_models/item_category.dart';
 import 'package:castel_pos/data_models/item_data.dart';
+import 'package:castel_pos/providers/menu_items_provider.dart';
+import 'package:castel_pos/providers/order_data_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class ItemWidget extends StatefulWidget {
   final ItemData itemData;
@@ -19,13 +23,36 @@ class ItemWidgetState extends State<ItemWidget> {
       decoration: itemWidgetDecoration(),
       height: 110,
       width: 120,
+      child: selected(widget.itemData) ? showAddToOrderListOptions() : showItemData(),
+      );
+  }
+
+  selected(ItemData itemData) {
+    var menuItemsProvider = Provider.of<MenuItemsProvider>(context);
+    if(menuItemsProvider.selectedItemData!=null) {
+      if(itemData.isTheSameAs(menuItemsProvider.selectedItemData)) return true;
+    } return false;
+  }
+
+
+
+
+  showItemData() {
+
+    var menuItemsProvider = Provider.of<MenuItemsProvider>(context);
+
+    return InkWell(
+      onTap: () {
+        menuItemsProvider.setSelectedItemData = widget.itemData;
+        // menuItemsProvider.setSelectedItemID = widget.itemData.id;
+      },
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          itemName(widget.itemData.name),
-          priceLabel(widget.itemData.price.toString()),
-        ],
-      )
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        itemName(widget.itemData.name),
+        priceLabel(widget.itemData.price.toString()),
+      ],
+    ),
     );
   }
 
@@ -82,6 +109,86 @@ class ItemWidgetState extends State<ItemWidget> {
     );
   }
 
+
+  showAddToOrderListOptions() {
+    return Column(
+      children: [
+        cancelItemSelectionButton(),
+        selectionCounterButtons(),  
+        addItemSelectionButton(),
+      ],
+    );
+  }
+
+  selectionCounterButtons() {
+    var menuItemsProvider = Provider.of<MenuItemsProvider>(context);
+    return InkWell(
+      onTap: () {
+
+      },
+        child: Container(
+        height: 48,
+        child: Row(
+          children: [
+            InkWell(
+              onTap: () => menuItemsProvider.decreaseSelectedItemCount(),
+              child: Icon(Icons.keyboard_arrow_left, size: 35,)),
+            Expanded(child: Container(child: Center(child: Text(menuItemsProvider.selectedItemCount.toString()))),),
+            InkWell(
+              onTap: () => menuItemsProvider.increaseSelectedItemCount(),
+              child: Icon(Icons.keyboard_arrow_right, size: 35)),
+          ],
+        ),
+      ),
+    );
+  }
+
+  cancelItemSelectionButton() {
+    var menuItemsProvider = Provider.of<MenuItemsProvider>(context);
+    return InkWell(
+      onTap: () {
+        menuItemsProvider.resetSelectedItemData();
+      },
+          child: Row(
+        children: [
+          Expanded(
+            child: Container(
+              color: Colors.red,
+              height: 30,
+              child: Center(child: Text("Cancel")),
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
+  addItemSelectionButton() {
+
+    var orderDataProvider = Provider.of<OrderDataProvider>(context);
+    var menuItemsProvider = Provider.of<MenuItemsProvider>(context);
+
+    return InkWell(
+      onTap: () {
+        orderDataProvider.addToOrderList(menuItemsProvider.selectedItemData, menuItemsProvider.selectedItemCount);
+        menuItemsProvider.setSelectedItemData = ItemData(id: "", name: "", category: menuItemsProvider.selectedCategory, price: 0.0);
+      },
+          child: Row(
+        children: [
+          Expanded(
+            child: Container(
+              color:Colors.blue,
+              height: 30,
+              child: Center(child: Text("Add")),
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
+
+
 }
 
 
@@ -89,37 +196,4 @@ class ItemWidgetState extends State<ItemWidget> {
 
 
 
-          // Row(
-          //   children: [
-          //     Expanded(
-          //       child: Container(
-          //         color: Colors.red,
-          //         height: 35,
-          //         child: Center(child: Text("Cancel")),
-          //       ),
-          //     )
-          //   ],
-          // ),
-
-          // Container(
-          //   height: 40,
-          //   child: Row(
-          //     children: [
-          //       Icon(Icons.keyboard_arrow_left, size: 40,),
-          //       Expanded(child: Container(child: Center(child: Text("1"))),),
-          //       Icon(Icons.keyboard_arrow_right, size: 40),
-          //     ],
-          //   ),
-          // ),
-
-          // Row(
-          //   children: [
-          //     Expanded(
-          //       child: Container(
-          //         color:Colors.blue,
-          //         height: 35,
-          //         child: Center(child: Text("Add")),
-          //       ),
-          //     )
-          //   ],
-          // ),
+          

@@ -1,4 +1,5 @@
 import 'package:castel_pos/pos_screen.dart';
+import 'package:castel_pos/providers/menu_items_provider.dart';
 import 'package:castel_pos/providers/order_data_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -18,17 +19,22 @@ class _MyAppState extends State<MyApp> {
   
   @override
   void initState() {
+
     // switch to landscape mode
     lockLandscapeMode();
+    
     // hides status bar
     hideStatusBar();
+
     super.initState();
   }
+
 
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
+        ChangeNotifierProvider<MenuItemsProvider>(create: (context) => MenuItemsProvider()),
         ChangeNotifierProvider<OrderDataProvider>(create: (context) => OrderDataProvider()),
       ],
       child: MaterialApp(

@@ -1,4 +1,6 @@
+import 'package:castel_pos/data_models/discount.dart';
 import 'package:castel_pos/data_models/item_category.dart';
+import 'package:castel_pos/data_models/item_data.dart';
 import 'package:castel_pos/data_models/order_list_item.dart';
 import 'package:flutter/material.dart';
 
@@ -7,31 +9,11 @@ class OrderDataProvider extends ChangeNotifier {
   // resets the order data to accommodate new order
   // WARN: this methods rebuilds subscribed widgets
   resetValues() {
+    _selectedDiscount = 0;
+    _discount = 0;
     resetOrderList(notify: false);
-    resetSelectedItemCategory(notify: false);
     notifyListeners();
   }
-
-
-
-
-
-  ItemCategory _selectedCategory = ItemCategory.burger;
-
-  get selectedCategory => _selectedCategory;
-
-  set setSelectedItemCategory(ItemCategory _newCategory) {
-    _selectedCategory = _newCategory;
-    notifyListeners();
-  }
-
-  resetSelectedItemCategory({@required bool notify}) {
-    _selectedCategory = ItemCategory.burger;
-    if (notify) notifyListeners();
-  }
-
-
-
 
 
   List<OrderListItemData> _orderList = List();
@@ -48,19 +30,63 @@ class OrderDataProvider extends ChangeNotifier {
     if(notify) notifyListeners();
   }
 
-  void addToOrderList(OrderListItemData _newValue) {
-    _orderList.add(_newValue);
+  void addToOrderList(ItemData _newValue, int count) {
+
+    int x;
+
+    for(x=0;x<_orderList.length;x++) {
+      if(_orderList[x].item.isTheSameAs(_newValue)) {
+        _orderList[x].qty += count;
+        break;
+      }
+    }
+
+    if(x==_orderList.length) {
+      _orderList.add(OrderListItemData(item: _newValue, qty: count));
+    }
+
     notifyListeners();
   }
 
-  void removeFromOrderList(int _index) {
-    _orderList.removeAt(_index);
+  void removeFromOrderList(ItemData _newValue) {
+    
+    for(int x=0;x<_orderList.length;x++) {
+      if(_orderList[x].item.isTheSameAs(_newValue)) {
+        _orderList.removeAt(x);
+        break;
+      }
+    }
     notifyListeners();
   }
 
 
 
 
+
+  int _discount = 0;
+  int get discount => _discount;
+  set setDiscount(int _newDiscountValue) {
+    _discount = _newDiscountValue;
+    notifyListeners();
+  }
+
+
+  int _selectedDiscount = 0;
+  int get selectedDiscount => _selectedDiscount;
+  set setSelectedDiscount(int _newDiscountValue) => _selectedDiscount = _newDiscountValue;
+
+
+  bool _discountListLoaded = false;
+  bool get discountListLoaded => _discountListLoaded;
+  set setDiscountListLoaded(bool _bool) => _discountListLoaded = _bool;
+
+
+  List<Discount> _discountList = List();
+  get discountList => _discountList;
+  void setDiscountList(List<Discount> _newDiscountList, bool notify) {
+    _discountList = _newDiscountList;
+    if(notify) notifyListeners();
+  }
 
   double get total => calculateTotal();
 
@@ -70,7 +96,20 @@ class OrderDataProvider extends ChangeNotifier {
     for(int x=0;x<_orderList.length;x++)
       _returnValue += _orderList[x].totalPrice;
 
+    return _returnValue - (_returnValue*(_discount/100));
+    
+  }
+
+  double get subTotal => calculateSubTotal();
+
+  double calculateSubTotal() {
+    double _returnValue = 0;
+
+    for(int x=0;x<_orderList.length;x++)
+      _returnValue += _orderList[x].totalPrice;
+
     return _returnValue;
+    
   }
 
 

@@ -1,6 +1,9 @@
 import 'package:castel_pos/data_models/item_data.dart';
+import 'package:castel_pos/data_models/order_list_item.dart';
+import 'package:castel_pos/providers/order_data_provider.dart';
 import 'package:castel_pos/widgets/order_list/order_list_item.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class OrderListItems extends StatefulWidget {
   State createState() => OrderListItemsState();
@@ -14,6 +17,10 @@ class OrderListItemsState extends State<OrderListItems> {
 
   @override
   Widget build(BuildContext context) {
+
+    
+    var orderDataProvider = Provider.of<OrderDataProvider>(context);
+
     return Expanded(
           child: Container(
             decoration: BoxDecoration(
@@ -29,9 +36,7 @@ class OrderListItemsState extends State<OrderListItems> {
                   Expanded(
                     child: Container(
                       child: Column(
-                        children: [
-                          
-                        ],
+                        children: orderListItems(orderDataProvider.orderList),
                       ),
                     ),
                   ),
@@ -42,7 +47,15 @@ class OrderListItemsState extends State<OrderListItems> {
     );
   }
 
-  orderListItems(ItemData _item, int qty) {
+  List<Widget> orderListItems(List<OrderListItemData> _orderListItems) {
+    
+    List<Widget> _returnValue = List();
+    
+    for(int x=0;x<_orderListItems.length;x++)
+     _returnValue.add(OrderListItem(orderListItemData:_orderListItems[x]));
+
+    if(_returnValue.length==0) return [Container()];
+    else return _returnValue;
     
   }
 

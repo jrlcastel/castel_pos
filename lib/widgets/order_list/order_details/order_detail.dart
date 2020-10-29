@@ -1,4 +1,7 @@
+import 'package:castel_pos/providers/order_data_provider.dart';
+import 'package:castel_pos/widgets/order_list/order_details/discount_dialog.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class OrderDetail extends StatefulWidget {
   final String title;
@@ -16,17 +19,44 @@ class OrderDetailState extends State<OrderDetail> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: orderDetailsBoxDecoration(),
-      padding: EdgeInsets.fromLTRB(10, widget.valueWrapped ? 0 : 5, 10, 5),
-      child: Row(
-        children: [
-          orderDetailText(widget.title),
-          Spacer(),
-          widget.valueWrapped ? orderDetailWrappedValueText(widget.value) : orderDetailText(widget.value),
-        ],
+    
+    
+    var orderDataProvider = Provider.of<OrderDataProvider>(context);
+
+    return InkWell(
+      onTap: () {
+        showDiscountDialog(orderDataProvider);
+      },
+          child: Container(
+        decoration: orderDetailsBoxDecoration(),
+        padding: EdgeInsets.fromLTRB(10, widget.valueWrapped ? 0 : 5, 10, 5),
+        child: Row(
+          children: [
+            orderDetailText(widget.title),
+            Spacer(),
+            widget.valueWrapped ? orderDetailWrappedValueText(widget.value) : orderDetailText(widget.value),
+          ],
+        ),
       ),
     );
+  }
+
+  showDiscountDialog(OrderDataProvider orderDataProvider) async {
+    
+    
+    await showDialog(
+      context: context,
+      builder: (BuildContext context) => AlertDialog(
+        title: const Text("Select Discount:"),
+        actions: [
+          FlatButton(onPressed: ()=> Navigator.pop(context), child: Text("Cancel")),
+          FlatButton(onPressed: (){
+            orderDataProvider.setDiscount = orderDataProvider.selectedDiscount;
+            Navigator.pop(context);
+          }, child: Text("Confirm")),
+        ],
+        content: DiscountDialog(),
+      ));
   }
 
   Text orderDetailText(String _title) {

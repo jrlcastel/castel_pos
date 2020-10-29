@@ -1,4 +1,6 @@
+import 'package:castel_pos/providers/order_data_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class Total extends StatefulWidget {
   State createState() => TotalState();
@@ -12,6 +14,10 @@ class TotalState extends State<Total> {
 
   @override
   Widget build(BuildContext context) {
+
+    
+    var orderDataProvider = Provider.of<OrderDataProvider>(context);
+
     return Container(
       decoration: totalBoxDecoration(),
       padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
@@ -19,7 +25,7 @@ class TotalState extends State<Total> {
         children: [
           totalText("Total"),
           Spacer(),
-          totalText("\$ 800.00")
+          totalText("\P " + orderDataProvider.total.toString())
         ],
       ),
     );

@@ -1,0 +1,22 @@
+[
+	{
+	"discount_name" : "No Discount",
+	"discount" : "0"
+	},
+	{
+	"discount_name" : "Senior Citizen",
+	"discount" : "20"
+	},
+	{
+	"discount_name" : "PWD",
+	"discount" : "20"
+	},
+	{
+	"discount_name" : "Membership",
+	"discount" : "10"
+	},
+	{
+	"discount_name" : "Coupon 30%",
+	"discount" : "30"
+	}
+]

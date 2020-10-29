@@ -1,0 +1,68 @@
+[
+	{
+	"item_name" : "Big Mac",
+	"category" : "burger",
+	"price" : "149"
+	},
+
+	{
+	"item_name" : "Burger McDo",
+	"category" : "burger",
+	"price" : "35"
+	},
+
+	{
+	"item_name" : "Cheeseburger",
+	"category" : "burger",
+	"price" : "61"
+	},
+
+	{
+	"item_name" : "Cheeseburger Deluxe",
+	"category" : "burger",
+	"price" : "93"
+	},
+
+	{
+	"item_name" : "Cheesy Burger McDo",
+	"category" : "burger",
+	"price" : "47"
+	},
+
+	{
+	"item_name" : "Crispy Chicken Fillet Sandwich",
+	"category" : "burger",
+	"price" : "45"
+	},
+
+	{
+	"item_name" : "Double Cheeseburger",
+	"category" : "burger",
+	"price" : "116"
+	},
+
+	{
+	"item_name" : "Double McChicken",
+	"category" : "burger",
+	"price" : "210"
+	},
+
+	{
+	"item_name" : "McChicken",
+	"category" : "burger",
+	"price" : "120"
+	},
+
+	{
+	"item_name" : "Quarter Pounder with Cheese",
+	"category" : "burger",
+	"price" : "149"
+	},
+
+	{
+	"item_name" : "Triple Cheeseburger",
+	"category" : "burger",
+	"price" : "210"
+	}
+]
+		

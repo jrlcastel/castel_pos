@@ -1,5 +1,4 @@
 import 'package:castel_pos/global_variables.dart';
-import 'package:castel_pos/widgets/app_options/app_button.dart';
 import 'package:castel_pos/widgets/order_options/cancel_order_button.dart';
 import 'package:flutter/material.dart';
 
@@ -24,15 +23,13 @@ class AppOptionsBarState extends State<AppOptionsBar> {
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                AppButton(icon: Icon(Icons.settings), onPressed: (){},),
-                AppButton(icon: Icon(Icons.bar_chart_rounded), onPressed: (){},),
                 Spacer(),
                 CancelOrderButton(),
               ],
             ),
           )),
       ],
-            );
+    );
   }
 
 }

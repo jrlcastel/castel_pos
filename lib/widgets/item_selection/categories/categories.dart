@@ -1,3 +1,4 @@
+import 'package:castel_pos/data_models/item_category.dart';
 import 'package:castel_pos/global_variables.dart';
 import 'package:castel_pos/widgets/item_selection/categories/category_button.dart';
 import 'package:flutter/material.dart';
@@ -19,11 +20,11 @@ class CategoriesState extends State<Categories> {
     color: GlobalVariables.bg,
       child: Row(
         children: [
-          CategoryButton(text: "Burgers", icon: Icons.fastfood, selected: true,),
-          Container(width: 15,),
-          CategoryButton(text: "Beverages", icon: Icons.wine_bar, selected: false,),
-          Container(width: 15,),
-          CategoryButton(text: "Combo Meals", icon: Icons.restaurant_menu, selected: false,),
+          CategoryButton(text: "Burgers", icon: Icons.fastfood, category: ItemCategory.burger,),
+          Container(width: 12,),
+          CategoryButton(text: "Beverages", icon: Icons.wine_bar, category: ItemCategory.beverage),
+          Container(width: 12,),
+          CategoryButton(text: "Combo Meals", icon: Icons.restaurant_menu, category: ItemCategory.combo_meal),
         ],
       ),
     );
