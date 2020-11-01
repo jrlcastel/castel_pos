@@ -1,13 +1,14 @@
 import 'package:castel_pos/data_models/item_category.dart';
 import 'package:castel_pos/data_models/item_data.dart';
 import 'package:castel_pos/db_sqlite/init_db.dart';
-import 'package:castel_pos/global_variables.dart';
 import 'package:castel_pos/providers/menu_items_provider.dart';
 import 'package:castel_pos/widgets/item_selection/item_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:provider/provider.dart';
 
+// List of menu items
+// shows items on the selected category
 class Items extends StatefulWidget {
   State createState() => ItemsState();
 }
@@ -20,9 +21,6 @@ class ItemsState extends State<Items> {
 
   @override
   Widget build(BuildContext context) {
-
-    
-    var menuItemsProvider = Provider.of<MenuItemsProvider>(context);
 
     return Expanded(
       child: Row(
@@ -65,7 +63,7 @@ class ItemsState extends State<Items> {
 
   }
 
-
+  // future builder for menu item list
   itemListFutureBuilder () {
     return FutureBuilder(
       future: getItemList(),
@@ -85,7 +83,8 @@ class ItemsState extends State<Items> {
           } else if(snapshot.connectionState==ConnectionState.active) {
             return Center(child: Text("ACTIVE"),);
           }
-        } else return Center(child:Text("NO DATA"));
+        } return Center(child:Text("NO DATA"));
+
       },
 
         
@@ -102,21 +101,19 @@ class ItemsState extends State<Items> {
     print(" DEBUG: Item list Future builder called");
 
     var menuItemsProvider = Provider.of<MenuItemsProvider>(context);
-
+    
+    // returns respective widget lists for each category when selected
     if(menuItemsProvider.selectedCategory==ItemCategory.burger) {
-        print("DEBUG: BURGER List NOT loaded, calling database...");
         menuItemsProvider.setBurgerItemList = await getSelectedItemDataList("burgers", ItemCategory.burger);
         menuItemsProvider.setBurgerItemListLoaded();
         return menuItemsProvider.burgerItemList;
     }
     else if(menuItemsProvider.selectedCategory==ItemCategory.beverage) {
-        print("DEBUG: BEVERAGE List loaded, returning saved data...");
         menuItemsProvider.setBeverageItemList = await getSelectedItemDataList("beverages", ItemCategory.beverage);
         menuItemsProvider.setBeverageItemListLoaded();
         return menuItemsProvider.beverageItemList;
     }
     else if(menuItemsProvider.selectedCategory==ItemCategory.combo_meal) {
-        print("DEBUG: COMBO MEALS List loaded, returning saved data...");
         menuItemsProvider.setComboMealItemList = await getSelectedItemDataList("combo_meals", ItemCategory.combo_meal);
         menuItemsProvider.setComboMealItemListLoaded();
         return menuItemsProvider.comboMealItemList;
@@ -142,11 +139,9 @@ class ItemsState extends State<Items> {
         price: dataList[x]['price'],
         category: _category
       );
-      // print("   DEBUG: looping - fetched data List values, length: ${dataList.length}, x: $x");
-      // print("   DEBUG: " + dataList[x].toString());
-      returnValue.add(dummy);
       
-      print("   DEBUG: " + dummy.toString());
+      returnValue.add(dummy);
+
     }
 
     return returnValue;
@@ -172,13 +167,10 @@ class ItemsState extends State<Items> {
           runSpacing: 10,
           spacing: 10,
           children: returnValue,
-          // children: dummyItemList(25),
         ),
       ],
     );
   }
-
-
 
 
 
@@ -188,20 +180,6 @@ class ItemsState extends State<Items> {
       border: Border.all(width:1, color: Colors.grey),
       color: Color.fromRGBO(210, 210, 210, 1.0),
     );
-  }
-
-  List<Widget> dummyItemList (int _count) {
-    List<Widget> returnValue = List();
-    ItemData _dummy = ItemData(
-      name: "mccrispy chicken fillet ala king w/ rice & fries and drinks and drinks and drinks and drinks and drinks and drinks",
-      id: "000000",
-      category: ItemCategory.combo_meal,
-      price: 9999.99,
-    );
-    for (int x=0;x<_count;x++) {
-      returnValue.add(ItemWidget(itemData: _dummy,));
-    }
-    return returnValue;
   }
 
 }

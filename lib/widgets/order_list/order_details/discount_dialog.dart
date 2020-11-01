@@ -2,7 +2,6 @@ import 'package:castel_pos/data_models/discount.dart';
 import 'package:castel_pos/db_sqlite/init_db.dart';
 import 'package:castel_pos/providers/order_data_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 class DiscountDialog extends StatefulWidget {
@@ -22,11 +21,6 @@ class DiscountDialogState extends State<DiscountDialog> {
 
   @override
   Widget build(BuildContext context) {
-    
-  var orderDataProvider = Provider.of<OrderDataProvider>(context);
-
-    
-
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -71,7 +65,7 @@ class DiscountDialogState extends State<DiscountDialog> {
           } else if(snapshot.connectionState==ConnectionState.active) {
             return Center(child: Text("ACTIVE"),);
           }
-        } else return Center(child:Text("NO DATA"));
+        } return Center(child:Text("NO DATA"));
       },
     );
   }

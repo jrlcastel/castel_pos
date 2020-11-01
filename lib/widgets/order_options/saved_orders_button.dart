@@ -1,10 +1,7 @@
 import 'package:castel_pos/db_sqlite/init_db.dart';
 import 'package:castel_pos/global_variables.dart';
-import 'package:castel_pos/providers/menu_items_provider.dart';
-import 'package:castel_pos/providers/order_data_provider.dart';
 import 'package:castel_pos/widgets/saved_orders_screen/saved_orders_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class SavedOrdersButton extends StatefulWidget {
   State createState() => SavedOrdersButtonState();
@@ -23,9 +20,6 @@ class SavedOrdersButtonState extends State<SavedOrdersButton> {
 
   @override
   Widget build(BuildContext context) {
-    
-    var orderDataProvider = Provider.of<OrderDataProvider>(context);
-    var menuItemsProvider = Provider.of<MenuItemsProvider>(context);
 
     return FlatButton(
       onPressed: () {
@@ -40,8 +34,6 @@ class SavedOrdersButtonState extends State<SavedOrdersButton> {
       padding: EdgeInsets.all(3.0),
     );
   }
-
-
 
 
   Text buttonText(String _buttonName) {

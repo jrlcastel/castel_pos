@@ -3,6 +3,8 @@ import 'package:castel_pos/global_variables.dart';
 import 'package:castel_pos/widgets/item_selection/categories/category_button.dart';
 import 'package:flutter/material.dart';
 
+
+// Group of category buttons
 class Categories extends StatefulWidget {
   State createState() => CategoriesState();
 }

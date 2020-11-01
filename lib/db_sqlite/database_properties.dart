@@ -1,5 +1,3 @@
-import 'dart:convert';
-import 'package:flutter/services.dart';
 
   // table names
   String burgersTableName = "burgers";
@@ -70,7 +68,7 @@ import 'package:flutter/services.dart';
     'discount' : "INTEGER",
   };
 
-  // db table properties
+  // generate db table properties
   String generateCreateTableQuery (String tableName, Map<String, String> columns) {
     String tableColumns = "";
     int colCount = columns.length;

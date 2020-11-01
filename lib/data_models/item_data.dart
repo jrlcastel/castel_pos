@@ -20,6 +20,7 @@ class ItemData {
   // }
 
 
+  // used to compare the same data type
   bool isTheSameAs(ItemData _newValue) {
     if(this.category!=_newValue.category) return false;
     else if(this.id!=_newValue.id) return false;
@@ -28,6 +29,7 @@ class ItemData {
     else return true;
   }
 
+  // used for debugging
   @override
   String toString() {
   return "ITEM DATA - Name: ${this.name}, Price: ${this.price.toString()}, ";

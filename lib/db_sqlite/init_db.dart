@@ -1,9 +1,7 @@
 import 'dart:convert';
 import 'package:castel_pos/db_sqlite/database_properties.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:path/path.dart';
-import 'dart:io';
 import 'package:sqflite/sqflite.dart';
 
 class MenuOrderingDatabase {
@@ -87,52 +85,56 @@ class MenuOrderingDatabase {
 
   }
 
-  // populate order details table
-  Future saveOrderDetails(List<Map> _orderDetails) async {
-    Database _db = await instance.database;
-    for(int x=0; x<_orderDetails.length;x++) 
-      await _db.insert(orderDetailsTableName, _orderDetails[x]);
-  }
-
-  // populate order summary
-  Future saveOrderSummary(Map _orderSummary) async {
-    Database _db = await instance.database;
-    return await _db.insert(orderSummaryTableName, _orderSummary);
-  }
-
-
-  Future getDatabaseTableItems (String tableName) async {
-    print("DEBUG: Database - Fetching $tableName data... ");
-    Database _db = await instance.database;
-    return await _db.query(tableName);
-  }
-
-  Future removeFromSummaryTable (String id) async {
-    Database _db = await instance.database;
-    return await _db.rawQuery("DELETE FROM \"order_summary\" WHERE \"order_summary_id\"=\"$id\"");
-  }
-
+  
+  // specific function for fetching order details
   Future getOrderDetails (String tableName, String summaryID) async {
     print("DEBUG: Database - Fetching $tableName data... ");
     Database _db = await instance.database;
     return await _db.rawQuery("SELECT * FROM \"$tableName\" WHERE \"summary_id\"=\"$summaryID\"");
   }
 
+  // specific function for saving order details
+  Future saveOrderDetails(List<Map> _orderDetails) async {
+    Database _db = await instance.database;
+    for(int x=0; x<_orderDetails.length;x++) 
+      await _db.insert(orderDetailsTableName, _orderDetails[x]);
+  }
+  
+  // specific function to delete items from order summary
+  Future removeFromSummaryTable (String id) async {
+    Database _db = await instance.database;
+    return await _db.rawQuery("DELETE FROM \"order_summary\" WHERE \"order_summary_id\"=\"$id\"");
+  }
 
+  // specific function for saving order summary
+  Future saveOrderSummary(Map _orderSummary) async {
+    Database _db = await instance.database;
+    return await _db.insert(orderSummaryTableName, _orderSummary);
+  }
+
+  // returns DB table content
+  Future getDatabaseTableItems (String tableName) async {
+    print("DEBUG: Database - Fetching $tableName data... ");
+    Database _db = await instance.database;
+    return await _db.query(tableName);
+  }
+
+
+  // prints the content of a table
+  // used for debugging and code tracing
   void printTable(String tableName) async {
     Database _db = await instance.database;
     List<Map> res = await _db.query(tableName);
 
     print("\n\nDATABASE TABLE NAME: $tableName");
 
-    for(int x=0;x<res.length;x++)
-        print("$x - " + res[x].toString());
-
-    print("\n\n");
-
+    // prints the table items 1 by 1
+    for(int x=0;x<res.length;x++) print("$x - " + res[x].toString());
   }
 
   
+  // retrieves jsonbody
+  // this function converts it to list of maps
   getMapListFromJsonFile(String filePath, Map properties) async {
 
     List<Map> _m = List();

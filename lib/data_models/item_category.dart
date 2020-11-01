@@ -1,12 +1,7 @@
+// used in the logic component of the app
+// created to avoid using strings
 enum ItemCategory {
   burger,
   beverage,
   combo_meal,
 }
-
-
-  String itemCategoryToString (ItemCategory _x) {
-    if(_x==ItemCategory.beverage) return 'beverage';
-    else if(_x==ItemCategory.burger) return 'burger';
-    else return 'combo_meal';
-  } 

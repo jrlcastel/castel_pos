@@ -1,10 +1,12 @@
-import 'package:castel_pos/data_models/item_category.dart';
 import 'package:flutter/material.dart';
 
 class Discount {
 
+  // name of discount type
   String discountName;
+  // discount from 1 to 100
   int discount;
+  // discount identifier 
   int discountID;
 
   @override

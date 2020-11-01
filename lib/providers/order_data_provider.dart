@@ -1,5 +1,4 @@
 import 'package:castel_pos/data_models/discount.dart';
-import 'package:castel_pos/data_models/item_category.dart';
 import 'package:castel_pos/data_models/item_data.dart';
 import 'package:castel_pos/data_models/order_list_item.dart';
 import 'package:flutter/material.dart';
@@ -17,9 +16,7 @@ class OrderDataProvider extends ChangeNotifier {
 
 
   List<OrderListItemData> _orderList = List();
-  
   List<OrderListItemData> get orderList => _orderList;
-
   void setOrderList({@required List<OrderListItemData> newValue, @required bool notify}) {
     _orderList = newValue;
     if(notify) notifyListeners();

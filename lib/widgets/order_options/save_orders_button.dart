@@ -6,22 +6,19 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 // Must be stateful to call setState whenever needed
-class PayButton extends StatefulWidget {
-  State createState() => PayButtonState();
+class SaveOrderButton extends StatefulWidget {
+  State createState() => SaveOrderButtonState();
 }
 
-class PayButtonState extends State<PayButton> {
+class SaveOrderButtonState extends State<SaveOrderButton> {
   
   final db = MenuOrderingDatabase.instance;
-  
 
   @override
   Widget build(BuildContext context) {
 
-    
     var orderDataProvider = Provider.of<OrderDataProvider>(context);
     var menuItemsProvider = Provider.of<MenuItemsProvider>(context);
-
 
     return InkWell(
         child: Row(
@@ -30,11 +27,10 @@ class PayButtonState extends State<PayButton> {
             child: Container(
               height: 40,
               child: FlatButton(
-                
                 onPressed: () async {
-                  
                   if(orderDataProvider.orderList.length>0) {
-
+                    
+                    // removes internal links
                     double st = orderDataProvider.subTotal;
                     int d = orderDataProvider.discount;
                     double t = orderDataProvider.total;
@@ -46,17 +42,13 @@ class PayButtonState extends State<PayButton> {
                       'total' : t
                     };
 
-
-
                     db.saveOrderSummary(orderSummary).then((value) {
                       db.saveOrderDetails(orderListToMapList(orderDataProvider.orderList, value)).whenComplete(() {
                         orderDataProvider.resetValues();
                         menuItemsProvider.resetSelectedItemData();
                       });
                     });
-                    
-
-                  } else ; // do nothing
+                  } // else do nothing
 
                 },
                 height: 40,

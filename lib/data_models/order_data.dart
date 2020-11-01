@@ -1,8 +1,7 @@
-import 'package:castel_pos/data_models/item_category.dart';
 import 'package:flutter/material.dart';
 
 class OrderDataSummary {
-
+  
   String orderSummaryID;
   DateTime dateTime;
   double subTotal;

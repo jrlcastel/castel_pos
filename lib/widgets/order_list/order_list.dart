@@ -6,6 +6,8 @@ import 'package:castel_pos/widgets/order_list/order_list_title.dart';
 import 'package:castel_pos/widgets/order_options/save_orders_button.dart';
 import 'package:flutter/material.dart';
 
+
+// Order List
 class OrderList extends StatefulWidget {
   final int horizontalFlex;
   OrderList({@required this.horizontalFlex});
@@ -27,12 +29,17 @@ class OrderListState extends State<OrderList> {
               color: GlobalVariables.bg,
               child: Column(
                 children: [
+                  // title for order list
                   OrderListTitle(orderListTitle: "Order List"),
+                  // label for order lsit columns
                   OrderListHeaderLabel(),
+                  // order list items
                   OrderListItems(),
+                  // order list calculations
                   OrderSummaryDetails(),
                   Container(height: 10),
-                  PayButton(),
+                  // save order button
+                  SaveOrderButton(),
                 ],
               )
             ),

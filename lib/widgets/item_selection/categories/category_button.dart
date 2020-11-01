@@ -62,6 +62,7 @@ class CategoryButtonState extends State<CategoryButton> {
     );
   }
 
+  // shape for flatbutton
   RoundedRectangleBorder flatButtonShape() {
     return RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(10.0),

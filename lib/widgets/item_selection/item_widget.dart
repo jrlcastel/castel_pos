@@ -1,4 +1,3 @@
-import 'package:castel_pos/data_models/item_category.dart';
 import 'package:castel_pos/data_models/item_data.dart';
 import 'package:castel_pos/providers/menu_items_provider.dart';
 import 'package:castel_pos/providers/order_data_provider.dart';

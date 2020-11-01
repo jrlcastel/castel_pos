@@ -1,6 +1,5 @@
 import 'package:castel_pos/data_models/item_category.dart';
 import 'package:castel_pos/data_models/item_data.dart';
-import 'package:castel_pos/data_models/order_list_item.dart';
 import 'package:flutter/material.dart';
 
 class MenuItemsProvider extends ChangeNotifier {
@@ -46,28 +45,6 @@ class MenuItemsProvider extends ChangeNotifier {
 
 
 
-
-
-
-  // String _selectedItemID = "";
-
-  // resetSelectedID () {
-  //   _selectedItemID = "";
-  // }
-
-  // get selectedItemID => _selectedItemID;
-
-  // set setSelectedItemID(String _newValue) {
-  //   _selectedItemID = _newValue;
-  //   _selectedItemCount = 1;
-  //   notifyListeners();
-  // }
-
-
-
-
-
-
   bool _beverageItemListLoaded = false;
   get beverageItemListLoaded =>_beverageItemListLoaded;
   void setBeverageItemListLoaded () {
@@ -109,14 +86,11 @@ class MenuItemsProvider extends ChangeNotifier {
 
 
   ItemCategory _selectedCategory = ItemCategory.burger;
-
   get selectedCategory => _selectedCategory;
-
   set setSelectedItemCategory(ItemCategory _newCategory) {
     _selectedCategory = _newCategory;
     notifyListeners();
   }
-
   resetSelectedItemCategory({@required bool notify}) {
     _selectedCategory = ItemCategory.burger;
     if (notify) notifyListeners();
@@ -142,13 +116,9 @@ class MenuItemsProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // void clearBurgerItemList() {
-  //   _burgerItemList = List();
-  //   notifyListeners();
-  // }
 
 
-  
+
 
   List<ItemData> _beverageItemList = List();
   
@@ -163,11 +133,6 @@ class MenuItemsProvider extends ChangeNotifier {
     _beverageItemList.add(_newItem);
     notifyListeners();
   }
-
-  // void clearBeverageItemList() {
-  //   _beverageItemList = List();
-  //   notifyListeners();
-  // }
 
 
 
@@ -185,12 +150,6 @@ class MenuItemsProvider extends ChangeNotifier {
     _comboMealItemList.add(_newItem);
     notifyListeners();
   }
-
-  // void clearComboMealItemList() {
-  //   _comboMealItemList = List();
-  //   notifyListeners();
-  // }
-
 
 
 

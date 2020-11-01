@@ -1,7 +1,6 @@
 import 'package:castel_pos/widgets/item_selection/item_selection.dart';
 import 'package:castel_pos/widgets/order_list/order_list.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 class POSScreen extends StatefulWidget {
   State createState() => POSScreenState();

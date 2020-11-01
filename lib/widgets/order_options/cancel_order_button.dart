@@ -44,18 +44,7 @@ class CancelOrderButtonState extends State<CancelOrderButton> {
   }
 
 
-  // Save button onPressed handler
-  // Receives nothing, returns nothing
-  // void cancelButtonOnPressedFunction() async {
-    
 
-  //   // Debugging purposes
-  //   print("    DEBUG: Cancel Order Button Pressed");
-
-
-    
-
-  // }
 
 
   Text buttonText(String _buttonName) {

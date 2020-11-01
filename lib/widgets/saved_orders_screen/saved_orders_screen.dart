@@ -1,6 +1,5 @@
 import 'package:castel_pos/data_models/order_data.dart';
 import 'package:castel_pos/db_sqlite/init_db.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class SavedOrdersScreen extends StatefulWidget {
@@ -64,7 +63,7 @@ class SavedOrdersScreenState extends State<SavedOrdersScreen> {
     return Expanded(
       child: Container(
         decoration: BoxDecoration(
-          color: Colors.green,
+          color: Colors.white,
           border: Border.all(
             width:2,
             color: Colors.grey
@@ -128,6 +127,7 @@ class SavedOrdersScreenState extends State<SavedOrdersScreen> {
               child: Icon(Icons.close, size: 20), 
               onTap: () {
                 removeFromSummaryTable(_data.orderSummaryID);
+                selectedOrder = "";
                 setState(() {});
               }),
             Container(width:10),
@@ -205,8 +205,8 @@ class SavedOrdersScreenState extends State<SavedOrdersScreen> {
       } else if(snapshot.connectionState==ConnectionState.done) {
 
         print("\n\nFUTURE RESULT LENGHT: ${snapshot.data.length}");
-
-        return SingleChildScrollView(
+        if(snapshot.data.length==0) return Center(child: Text("NO DATA"));
+        else return SingleChildScrollView(
           child: Container(
             child: Column(
             children: orderSummaryWidgetList(snapshotToSummaryDataList(snapshot.data)),
@@ -220,8 +220,8 @@ class SavedOrdersScreenState extends State<SavedOrdersScreen> {
       } else if(snapshot.connectionState==ConnectionState.active) {
         return Center(child: Text("ACTIVE"),);
       }
-    } else return Center(child:Text("NO DATA"));
-        },
+    } return Center(child:Text("NO DATA"));
+  },
       
       );
   }
@@ -382,7 +382,7 @@ class SavedOrdersScreenState extends State<SavedOrdersScreen> {
           } else if(snapshot.connectionState==ConnectionState.active) {
             return Center(child: Text("ACTIVE"),);
           }
-        } else return Center(child:Text("NO DATA"));
+        } return Center(child:Text("NO DATA"));
       },
     
     );
